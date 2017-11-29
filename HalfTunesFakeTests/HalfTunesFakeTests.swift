@@ -16,7 +16,7 @@ class HalfTunesFakeTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        controllerUnderTest = UIStoryboard(name: "main", bundle: nil).instantiateInitialViewController() as! SearchViewController
+        controllerUnderTest = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! SearchViewController
         let testBundle = Bundle(for: type(of: self))
         let path = testBundle.path(forResource: "abbaData", ofType: "json")
         let data = try? Data(contentsOf: URL(fileURLWithPath: path!), options: .alwaysMapped)
@@ -61,10 +61,11 @@ class HalfTunesFakeTests: XCTestCase {
         XCTAssertEqual(controllerUnderTest?.searchResults.count, 3, "Didn't parse 3 items from fake response")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    // Performance
+    func test_StartDownload_Performance() {
+        let track = Track(name: "Waterloo", artist: "ABBA", previewUrl: "http://a821.phobos.apple.com/us/r30/Music/d7/ba/ce/mzm.vsyjlsff.aac.p.m4a")
+        measure {
+            self.controllerUnderTest.startDownload(track)
         }
     }
     
